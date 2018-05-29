@@ -1,0 +1,627 @@
+HMC R Bootcamp 2018
+========================================================
+author: Jeho Park
+date: May 29, 2018
+transition: none
+
+HMC R Bootcamp 2018
+
+## DAY 1
+
+Reference:
+========================================================
+
+Some materials are adapted from the following websites:  
+* [R Bootcamp by Jared Knowles] (http://jaredknowles.com/r-bootcamp/) 
+* [R Bootcamp at Berkely] (http://statistics.berkeley.edu/computing/r-bootcamp/)  
+
+
+Some Housekeeping Stuff
+========================================================
+- **Slides** at http: http://rpubs.com/jepark/hmc-r-bootcamp-2016-day1
+- **Files** at http://bit.ly/hmc-r-bootcamp-file
+- **Data files** at at http://bit.ly/hmc-r-bootcamp-file
+
+
+This R bootcamp is...
+========================================================
+* about R's programming aspects.
+  - It's designed to help you start using and coding R.
+* not about Statistics.
+  - I assume that you already have a basic knowledge of Statistics
+* for your summer research and beyond.
+  - This bootcamp materials are used to help you get up to speed on using R as quickly as possible for your research activites 
+
+R Bootcamp Day 1 Agenda
+========================================================
+* Module 0: Introduction
+  + About this bootcamp
+  + Learning Objectives
+  + About R
+  + Getting ready (R environment setup)
+* Module 1: The Basics of R
+  + General Stuff
+  + RStudio
+  + R Data Structure (R Objects)
+  + Basic graphics
+  
+Day 1 Agenda (Cont.)
+========================================================
+* Module 2: Working with Data
+  + (Almost) clean data (CSV files)
+  + Data import and export (interactively)
+  + Data cleaning
+  + Subsetting
+  + Matrix vs Data Frame 
+  + Graphics (base plots)
+  + Simple graph manipulations (base plots)
+
+Module 0: Introduction (15 min)
+========================================================
+* Goals and learning objectives
+* What is R?
+* What is not R?
+* Then Why R?
+* Getting ready for R Bootcamp
+
+Bootcamp Goal:
+========================================================
+
+To prepare you to use R to handle and analyze sample data of your choice.
+
+Learning Objectives:
+========================================================
+_By the end of this two-day bootcamp, you will be able to:_
+* Restate the existing R script and explain what each block of the script is for.
+* Import and export data from/to a simple CSV file in R.
+* Distinguish the differences between R data objects and convert them.
+* Create basic plots using both base plot and ggplot2.
+* Use subsetting methods to create subsamples.
+* Create R markdown documents and R slides.
+* Create tidy data and manipulate those data using dplyr package.
+* Create a loop using R’s for loop syntax and know differences between loops and vectorization.
+* Create an if-else statement in R scripts and R functions.
+
+
+What is R?
+========================================================
+* R is a statical programming language/environment.
+* R is open source and free.
+* R is widely used.
+* R is cross-platform.
+* R is hard to learn (really?).
+
+What is not R?
+========================================================
+* S: R's ancestor
+* S-Plus: Commercial; modern implementation of S
+* SAS: Commercial; widely used in the commercial analytics.
+* STATA: Commercial; widely used by economists.
+* SPSS: Commercial; easy to use; widely used in Social Science.
+* MATLAB: Commercial; can do some Stats. 
+* Python: Also can do some Stats; one of the two mostly used programming languages in data science.
+
+Then Why R?
+========================================================
+* __R community is active and constantly growing__
+* R is one of the most popular stat programming lang
+* R has tons of user generated libraries/packages
+* R code is easily shared with others
+* R is constantly improved
+
+
+Then Why R?
+========================================================
+* R community is active and constantly growing
+* __R is one of the most popular stat programming lang__
+* R has tons of user generated libraries/packages
+* R code is easily shared with others
+* R is constantly improved
+
+###### Further reading about R's popularity in science and engineering:<br>
+###### R moves up to 5th place in IEEE language rankings at  https://www.r-bloggers.com/r-moves-up-to-5th-place-in-ieee-language-rankings/
+###### https://spectrum.ieee.org/static/interactive-the-top-programming-languages-2017 (6th in 2017)
+
+
+Then Why R?
+========================================================
+
+IEEE Spectrum: Popular Programming Languages in 2017
+![Poplar Programming Languages](The_Top_Programming_Languages_2017_-_IEEE_Spectrum.png)
+
+Then Why R?
+========================================================
+
+* R community is active and constantly growing
+* R is one of the most popular stat programming lang)
+* __R has tons of user generated libraries/packages__
+* R code is easily shared with others
+* R is constantly improved
+
+
+Getting help online and offline
+===============================
+### On the Internet:
+* Google! (Now Google knows "r" means the R programming language)
+* Stack Overflow: http://stackoverflow.com/questions/tagged/r
+* Cross-Validated: the statistics Q&A site http://stats.stackexchange.com/
+* Rseek meta search engine: http://rseek.org/ 
+* R-help listserv: https://www.r-project.org/mail.html
+
+### Local Resources:
+* Contact CIS: helpdesk@hmc.edu or jepark@hmc.edu
+* HMC R Users Group: r-users-l@g.hmc.edu
+
+Module 1: The Basics of R (45 min)
+========================================================
+* R scripting environment
+  * RStudio and its functionality
+* General stuff
+* Workspace of R and some calculations
+* R Objects (Vectors, Matrices, Lists, Data frames, and Factors)
+* Converting between different types of objects
+* Getting help online and offline
+
+
+What is RStudio?
+========================================================
+* Integrated Development Environment for R
+* Nice combination of GUI and CLI
+* 4 main windows, tabs, etc
+* Version control: **Git** and VPN 
+* **R Markdown** 
+* **R Presentation**
+
+Get ready
+========================================================
+* Let's open RStudio
+
+What Can We Do with RStudio?
+========================================================
+
+Take a look at RStudio panes and tabs
+
+<img src="rstudio_image.png" width="900">
+
+RStudio Project
+========================================================
+* RStudio project helps you to keep all the files associated with a project/work in one directory along with environment, history, version control (git) files. 
+* Let's create a new RStudio project by
+
+  File >> New Project...
+
+* Copy and paste the R command file and data files into the project directory. (RStudio limitation)
+
+  * Download files from https://github.com/jehopark/r-workshop-for-beginners-sp2018
+
+Getting Ready!
+========================================================
+* Check R  
+* Check RStudio 
+* Check RStudio project
+* Check slides
+* Check R command script
+
+
+General Stuff
+========================================================
+```{r, eval=FALSE}
+demo() # display available demos
+
+```{r, eval=FALSE}
+demo(graphics) # try graphics demo
+
+```{r, eval=FALSE}
+library() # show available packages on the computer
+
+```{r, eval=FALSE}
+search() # show loaded packages
+
+```{r, eval=FALSE}
+?hist # search for the usage of hist function
+
+```{r, eval=FALSE}
+??histogram # search for package documents containing the word "histogram"
+```
+
+
+Workspace of R
+========================================================
+
+R workspace stores objects like vecors, datasets and functions in memory (the available space for calculation is limited to the size of your computer's RAM).
+
+```{r}
+a <- 5 # notice a in your Environment window
+```
+
+```{r}
+A <- "text" 
+```
+
+```{r, eval=FALSE}
+a
+A
+ls()
+print(c(a,A))
+print(a, A)
+```
+
+Look Ma, R can do Math! 
+========================================================
+```{r, eval=FALSE}
+1+1
+```
+
+```{r, eval=FALSE}
+2+runif(1,0,1)
+```
+
+```{r, eval=FALSE}
+2+runif(1,min=0,max=1)
+```
+
+```{r, eval=FALSE}
+3^2
+```
+
+```{r, eval=FALSE}
+3*3
+```
+
+```{r, eval=FALSE}
+sqrt(3*3) # comments
+```
+
+```{r}
+# comments are preceded by hash sign
+#ignorehashtag!
+```
+
+Even More Math! 
+========================================================
+* R can take integrals and derivatives, for example:
+
+Numerical Integral of
+
+$\displaystyle\int_0^{\infty} \frac{1}{\sqrt{x}(x+1)}dx$ 
+
+```{r}
+# define the integrated function
+integrand <- function(x) {1/(sqrt(x)*(x+1))} 
+```
+```{r}
+# integrate the function from 0 to infinity
+integrate(integrand, lower=0, upper=Inf) 
+
+```
+
+
+R Objects: Vectors
+========================================================
+The most basic form of an R object.  
+A scalar value is __a vector of length one__.  
+A vector is an array object of the __same type__ (homogeneous) data elements.
+
+```{r, eval=FALSE}
+class(a)
+class(A)
+B <- c(a,A) # concatenation function
+B # see the values
+class(B) # why?
+```
+```{r, eval=FALSE}
+a <- rnorm(10)
+a[3:5] <- NA # NA is a missing value
+a
+```
+
+R Objects: Vectors (cont.)
+========================================================
+R has five basic or “__atomic__” classes of objects: 
+* character
+* numeric (real numbers) 
+* integer
+* complex
+* logical (True/False)
+
+_A vector contains a set of data in any one of the atomic classes._
+
+
+R Objects: Matrices
+========================================================
+A matrix is a two-dimensional rectangular object of the __same type__ (homogeneous) data elements. 
+
+```{r, eval=FALSE}
+mat <- matrix(rnorm(6), nrow = 3, ncol = 2) 
+mat # a matrix
+dim(mat) # dimension
+t(mat) 
+summary(mat) 
+```
+
+R Objects: Lists
+========================================================
+A list is an object that can store __different types__ of vectors. 
+```{r, eval=FALSE}
+list1 <- list(name=c("Joseph"), married=T, kids=2)
+list1
+list1$kids <- list1$kids+1
+list1$kids
+list2 <- list(numeric_data=a,character_data=A)
+list2
+all_list <- list(list1, list2)
+all_list
+```
+
+R Objects: Data frames
+========================================================
+A data frame is a __list of vectors of equal length__ with possibly different types. It is used for storing rectangular data tables.
+```{r, eval=FALSE}
+n <- c(2, 3, 5) # a vector 
+s <- c("aa", "bb", "cc") # a vector
+b <- c(TRUE, FALSE, TRUE) # a vector
+df <- data.frame(n, s, b) # a data frame
+df
+class(df$s) # was a string vector but now a factor. 
+mtcars # a built-in (attached) data frame
+mtcars$mpg
+```
+
+R Objects: Data frames (cont.)
+========================================================
+```{r, eval=FALSE}
+my_df <- data.frame(y1=rnorm(100),y2=rnorm(100), y3=rnorm(100))
+head(my_df) # display first few lines of data
+names(my_df) # display column names
+summary(my_df) # output depends on the data types
+plot(my_df)
+```
+
+R Objects: Factors
+========================================================
+* Factors are a special compoud object used to represent __categorical data__ such as gender, social class, etc.
+* Factors have 'levels' attribute. They may be nominal or ordered.
+```{r, eval=FALSE}
+v <- c("a","b","c","c","b")
+x <- factor(v) # turn the character vector into a factor object
+z <- factor(v, ordered = TRUE) # ordered factor
+x
+z
+table(x)
+```
+
+
+Converting between different types
+==============================================
+Use of the as() family of functions. Type as. and wait to see the list of as() functions.
+```{r, eval=FALSE}
+integers <- 1:10
+as.character(integers)
+as.numeric(c('3.7', '4.8'))
+```
+```{r, eval=FALSE}
+indices <- c(1.7, 2.3)
+integers[indices] # sometimes R is too generous
+integers[0.999999999] # close to 1 but...
+```
+```{r, eval=FALSE}
+df <- as.data.frame(mat)
+df
+```
+
+Getting help online and offline
+===============================
+* Rseek meta search engine: http://rseek.org/ 
+* R-help listserv: https://www.r-project.org/mail.html
+* Stack Overflow: http://stackoverflow.com/questions/tagged/r
+* Cross-Validated: the statistics Q&A site http://stats.stackexchange.com/
+* Contact CIS: helpdesk@hmc.edu or jepark@hmc.edu
+* HMC R Users Group: r-users-l@g.hmc.edu
+
+Wrap-up exercise (15 min)
+===============================
+__Basics__  
+1) Using cars datasets, create a variable 'stop_mean' that contains mean stopping distance.  
+2) Create a matrix 'cars_mat' by converting the cars data frame.  
+  
+__Challenges__  
+3) Install 'hflights' datasets.   
+4) Using hflights datasets, create a variable called 'x' that contains the mean flight arrival delay. (Hint: NA's)  
+5) Create a boolean (TRUE/FALSE) vector indicating whether the departure delay is shorter than the arrival delay.
+
+Break (5 min)
+============================
+Take a break!
+
+Solutions and discussions (15 min)
+============================
+1)  
+  
+2)  
+  
+3)  
+  
+4)  
+  
+5)
+
+Module 2: Working with Data
+=============================
+* Working with (almost) clean data
+* Data import and export (interactive way)
+* Subsetting
+* Using data frames vs. matrices
+
+Working with (almost) clean data
+==============================
+* Use read.table() to read text files into R
+* Try help document for read.table()
+
+Data Import
+==============================
+* read.csv() is a special case of read.table() 
+* Data import from your local folder
+```{r, eval=FALSE}
+cpds <- read.csv(file.path('.', 'data', 'cpds.csv'))
+head(cpds) # good to look at a few lines
+class(cpds) # data.frame
+```
+* Data import from the Internet
+```{r, eval=FALSE}
+data <- read.table("http://lib.stat.cmu.edu/jcgs/tu", skip=4, header=T)
+tail(data)
+```
+
+Data Import (Cont.)
+================================
+```{r, eval=FALSE}
+rta <- read.table("./data/RTADataSub.csv", sep = ",", head = TRUE)
+dim(rta)
+rta[1:5, 1:5]
+class(rta)
+class(rta$time) # what? let's see ?read.table more carefully
+```
+```{r, eval=FALSE}
+rta2 <- read.table("./data/RTADataSub.csv", sep = ",", head = TRUE, stringsAsFactors = FALSE)
+class(rta2$time)
+```
+
+Data and Plot Export
+=============================
+* Use write.table() to write data to a CSV file
+```{r, eval=FALSE}
+# save as a CSV file
+write.csv(data, file = "temp.csv", row.names = FALSE) 
+# save as a R data image
+save.image(file="myenv.RData")
+```
+* Writing out plots
+```{r, eval=FALSE}
+pdf('myplot.pdf', width = 7, height = 7) # call pdf() before calling plot()
+x <- rnorm(10); y <- rnorm(10)
+plot(x, y)
+dev.off()
+```
+
+Subsseting
+=========================
+Operators that can be used to extract subsets of R objects.
+* '[' and ']' always returns an object of the same class as the original; can be used to select more than one element.
+* '[[' and ']]' is used to extract elements of a list or a data frame; it can only be used to extract a single element.
+* $ is used to extract elements of a list or data frame by name.
+
+Subsetting (cont.)
+==========================
+```{r, eval=FALSE}
+x <- c("a", "b", "c", "c", "d", "a")
+x[1]
+x[1:4]
+x[x > "a"] 
+u <- x > "a" # what's u here?
+u
+x[u] # subsetting using a boolean vector
+y <- list(foo=x, bar=x[u]) 
+y
+y[[1]]
+y$bar
+```
+```{r, eval=FALSE}
+five_gears <- subset(mtcars, gear == 5) # use of subset function for data frames
+```
+
+Data frame vs matrix
+================================
+Consider the following:
+* Same types or different types? Numeric or other type?
+* Convenient using $ with col names?
+* Data size too big? (memory efficiency and size)
+```{r, eval=FALSE}
+m = matrix(1:400000, 2, 200000) # esp. for a large number of columns!
+d = as.data.frame(m)
+object.size(m) # 1600200 bytes
+object.size(d) # 22400568 bytes
+```
+* Conversion between data frame and matrix
+  + as.data.frame()
+  + as.matrix() or data.matrix() # consider coercion
+  
+Graphics (base graphics)
+=============================
+* Creating a graph
+```{r, eval=FALSE}
+attach(mtcars) # Attach mtcars to search path
+plot(wt, mpg) # notice objects are called by their names, not mtcars$wt
+plot(wt, mpg, 
+     main = "Regression of MPG on Weight",
+     xlab = "Weight", 
+     ylab = "MPG")
+plot(wt, mpg, ann = FALSE) 
+```
+* Changing/adding the details afterwards
+```{r, eval=FALSE}
+abline(h=25) # a reference line
+abline(lm(mpg~wt)) # look at the argument, what's lm?
+title(main = "Regression of MPG on Weight", xlab = "Weight", ylab = "MPG")
+
+```
+ 
+Manipulating graphs (base package)
+=============================
+* par() customizes many features of graphs such as fonts, colors, axes, and titles
+* par(optionname=value, optionname=value, ...)
+```{r, eval=FALSE}
+par()              # view current settings
+orig_par <- par()  # save current settings
+par(col.lab="red") # red x and y labels 
+plot(wt, mpg)      # create a plot with these new settings 
+par(orig_par)      # restore original settings
+plot(wt, mpg)
+plot(wt, mpg, col.lab="red") # change settings withing plot()
+```
+```{r, eval=FALSE}
+?par # see all the options
+```
+
+Further Study
+=========================
+
+* Online learning resources: https://www.rstudio.com/online-learning/#R
+* Swirl (self-paced interactive learning) package: http://swirlstats.com/ 
+
+Wrap-up exercise
+===========================
+__Basics__  
+1) Try installing a new library (lmtest) from Console  
+2) Try installing another library (ggplot2) from the Packages tab  
+
+__Challenges__  
+3) From the dataset, hflights, create a subsample based on delay times greater than 10 hours (600 min) from ArrDelay and name it, hflightsSub.  
+4) Set all of the extreme delays in ArrDelay (more than 300 minutes) in hflightsSub to NA.  
+5) Using ggplot2, plot a histogram of the flight delays with negative delays set to zero, censoring delay times at a maximum of 60 minutes. 
+
+Solutions and discussions (15 min)
+============================
+1)  
+  
+2)  
+  
+3)  
+  
+4)  
+  
+5)
+
+Homework (Day 1)
+========================================================
+1. Install git on your computer (if it's not already installed)
+2. Create a Github account (if you don't have it yet)
+3. Create a repository, hmc-r-bootcamp-2018, from GitHub
+4. Create a R project with version control and use the hmc-r-bootcamp-2018 repository's URL to connect your R project with the GitHub repository
+5. Do the wrap-up exercise with a new R markdown file (HMC-R-Bootcamp.Rmd) 
+6. Try "push" the new R markdown file to the repository
+7. Edit the "HMC-R-Bootcamp.Rmd" from GitHub
+8. Try "pull" the Rmd file to your local repository
+9. Digest what you've learned from Day 1
+
+
+
