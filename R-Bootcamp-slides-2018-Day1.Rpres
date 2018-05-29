@@ -18,9 +18,8 @@ Some materials are adapted from the following websites:
 
 Some Housekeeping Stuff
 ========================================================
-- **Slides** at http: http://rpubs.com/jepark/hmc-r-bootcamp-2016-day1
-- **Files** at http://bit.ly/hmc-r-bootcamp-file
-- **Data files** at at http://bit.ly/hmc-r-bootcamp-file
+- **Slides** at http://bit.ly/hmc-reu-r-bootcamp-2018-day1
+- **Files** at https://github.com/jehopark/hmc-reu-r-bootcamp-2018
 
 
 This R bootcamp is...
@@ -192,7 +191,7 @@ RStudio Project
 
 * Copy and paste the R command file and data files into the project directory. (RStudio limitation)
 
-  * Download files from https://github.com/jehopark/r-workshop-for-beginners-sp2018
+  * Download files from https://github.com/jehopark/hmc-reu-r-bootcamp-2018
 
 Getting Ready!
 ========================================================
