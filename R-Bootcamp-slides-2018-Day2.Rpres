@@ -158,10 +158,9 @@ Tidyverse website: https://www.tidyverse.org/
 
 Data wrangling with dplyr
 =======
-**TODO**  
-Introduce tidydata  
-Introduce pipe  
-Introduce dplyr verbs  
+* Introducing tidydata  
+* Introducing dplyr verbs  
+* Introducing pipe 
 
 What is tidy data 
 =======
