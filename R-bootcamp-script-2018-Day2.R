@@ -10,7 +10,7 @@ plot(wt, mpg, ann = FALSE)
 
 # Changing/adding the details afterwards
 abline(h=25) # a reference line
-abline(lm(mpg~wt)) # look at the argument, what's lm?
+abline(lm(mpg~wt)) # look at the argument, lm = linear model
 title(main = "Regression of MPG on Weight", xlab = "Weight", ylab = "MPG")
 
 ## Manipulating graphs (base package)
