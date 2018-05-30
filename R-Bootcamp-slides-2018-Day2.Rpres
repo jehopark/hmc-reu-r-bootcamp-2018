@@ -1,0 +1,452 @@
+HMC R Bootcamp 2018
+========================================================
+author: Jeho Park
+date: May 30, 2018
+transition: none
+width: 1280
+height: 768
+
+HMC R Bootcamp 2018
+
+## DAY 2 
+
+Agenda (Day 2)
+===========================
+* Module 2: Working with Data (Part 2)
+  + Graphics (base graphics)
+  + Manipulating graphs (base graphics)
+  + **ggplot2 graphics**
+* Module 3: Managing R project
+  + R workspace and working directory
+  + Using R packages (installing, loading, namespaces)
+  + **Reproducible research: sharing R files and projects using Git/Github**
+* Module 4: tidyverse and dplyr package
+  + Data wrangling
+* Module 5: Programming (scripting) in R
+  + Function
+  + Loop (for loop)
+  + Vectorization
+  + If-else
+  + Debugging
+  + Good coding practices
+
+Module 2: Working with data (Part 2)
+===========================
+* Graphics (base graphics)
+* Manipulating graphs
+
+Graphics (base graphics)
+=============================
+* Creating a graph
+```{r, eval=FALSE}
+attach(mtcars) # Attach mtcars to search path
+plot(wt, mpg) # notice objects are called by their names, not mtcars$wt
+plot(wt, mpg, 
+     main = "Regression of MPG on Weight",
+     xlab = "Weight", 
+     ylab = "MPG")
+plot(wt, mpg, ann = FALSE) 
+```
+* Changing/adding the details afterwards
+```{r, eval=FALSE}
+abline(h=25) # a reference line
+abline(lm(mpg~wt)) # look at the argument, what's lm?
+title(main = "Regression of MPG on Weight", xlab = "Weight", ylab = "MPG")
+
+```
+ 
+Manipulating graphs (base package)
+=============================
+* par() customizes many features of graphs such as fonts, colors, axes, and titles
+* par(optionname=value, optionname=value, ...)
+```{r, eval=FALSE}
+par()              # view current settings
+orig_par <- par()  # save current settings
+par(col.lab="red") # red x and y labels 
+plot(wt, mpg)      # create a plot with these new settings 
+par(orig_par)      # restore original settings
+plot(wt, mpg)
+plot(wt, mpg, col.lab="red") # change settings within plot()
+```
+```{r, eval=FALSE}
+?par # see all the options
+```
+
+ggplot2 graphics
+=============================
+**ggplot2** is a popular graphics package based on the idea that one can build every graph from the same few components such as _a data set_, _a set of visual marks (geoms)_, and _a coordinate system_. 
+```{r, eval=FALSE}
+library(ggplot2) # load ggplot2
+p <- qplot(wt, mpg) # quick plot (backward compatibility)
+p 
+p + geom_smooth(method = "lm", se = TRUE) # lm, se (standard error) 
+
+# ggplot2 comes with themes, for example, 
+p + theme_bw() # white background and black grid lines
+```
+
+```{r, eval=FALSE}
+## ggplot function
+ggp <- ggplot(mtcars, aes(wt, mpg)) + geom_point() 
+ggp 
+ggp + labs(x = "Weight", y = "MPG", title = "Regression of MPG on Weight")
+```
+
+Wrap-up exercise (15-20 min)
+============================
+Let's create a R markdown (Rmd file) for this exercise.
+There's a cheatsheet avaiable for you: Help > Cheatsheets > R Markdown Cheatsheet.
+
+__Basics__   
+(1) Create a smaller subset (10,000 samples) of the hflights dataset  
+(2) Plot a histogram of the flight delays with negative delays set to zero, censoring delay times at a maximum of 60 minutes. Try both base graphics and ggplot2.  
+(3) Plot the arrival delay against the departure delay as a scatterplot. And give it a main title and axis labels.  
+(4) Output it as a PDF and see if you'd be comfortable with including it in a report/paper.  
+(5) Make a boxplot of the departure delay as a function of the day of week. 
+
+__Challenge__  
+(6) If your RStudio project is connected to your GitHub repository, *add* this new Rmd file, *commit* it to git database, and *push* it to the GitHub repository.
+
+Managing R Project
+=========================
+* R Workspace
+  + Current R working environment including any user-defined objects
+  + Save and load workspace
+```{r, eval=FALSE}
+  save.image("r-bootcamp.Rdata") # save workspace  
+  rm(list=ls()) # remove all objects
+  load("r-bootcamp.Rdata") # bring the workspace back
+  save.image() # by default it saves workspace to .Rdata 
+```
+
+Managing R Project (cont.)
+=========================
+* R working directory
+  + the folder where R extracts and save files
+  + getwd() and setwd()
+```{r, eval=FALSE}
+curr_wd <- getwd() # returns absolute path to the working directory
+setwd("data") # change working directory to data folder
+setwd(file.path('~', 'Desktop'))
+```
+
+Managing R Project (cont.)
+=========================
+R Packages
+* Installing packages
+* Loading and attaching packages
+  + library() v.s. require()
+  + error v.s. warning
+* Pakcage namespace
+```{r, eval=FALSE}
+require("datasets") # load/attach datasets
+ls('package:datasets') 
+airmiles # airmiles object in datasets package
+airmiles <- 0 # Oops! overwritten?
+airmiles # global namespace
+datasets::airmiles # package namespace
+rm(airmiles) # removes user defined object airmiles
+```
+
+Break
+==================
+Take a break!
+
+Module 4: Tidyverse and dplyr package
+==================
+Tidyverse website: https://www.tidyverse.org/
+
+Data wrangling with dplyr
+=======
+**TODO**  
+Introduce tidydata  
+Introduce pipe  
+Introduce dplyr verbs  
+
+What is tidy data 
+=======
+It is often said that 80% of data scientists' time is spent on the cleaning and preparing data: 
+> ### Data tidying: structuring datasets to facilitate data analysis 
+   
+* Tidy datasets provide a standardized way to link the structure of a dataset (its physical layout) with its semantics (its meaning).
+* A dataset is a collection of values: (usually) numbers or strings
+* Values are organised in two ways. Every value belongs to a **variable** and an **observation**.
+* A variable contains all values that measure the same underlying attribute (like height, temperature, duration) across units. An observation contains all values measured on the same unit (like a person, or a day, or a race) across attributes.
+
+
+(source: https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html)
+
+An Example (Messy Data)
+====================
+Most statistical datasets are data frames made up of rows and columns. The columns are almost always labeled and the rows are sometimes labeled. The table has two columns and three rows, and both rows and columns are labeled:
+
+```{r, eval=TRUE}
+preg <- read.csv("./data2/preg.csv", stringsAsFactors = FALSE)
+preg
+```
+
+There are many ways to structure the same underlying data. The same data, but transposed:
+```{r, eval=TRUE}
+read.csv("./data2/preg2.csv", stringsAsFactors = FALSE)
+```
+
+The data is the same, but the layout is different. And also think about functional relationships between varialbles and comparisons between groups of observations.
+
+<!-- source: https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html) -->
+
+An Example (Tidy Data)
+====================
+"functional relationships between varialbles and comparisons between groups of observations":
+```{r, eval=TRUE}
+library(tidyr)
+library(dplyr)
+preg2 <- preg %>% 
+  gather(treatment, n, treatmenta:treatmentb) %>%
+  mutate(treatment = gsub("treatment", "", treatment)) %>%
+  arrange(name, treatment)
+preg2
+```
+
+Read more about tidy data at  https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html
+
+Data Wrangling with dplyr: verbs
+==================
+```{r, eval=TRUE, echo=FALSE}
+msleep <- read.csv("./data2/msleep.csv")
+```
+
+* Data: **mammals sleep** --
+The msleep (mammals sleep) data set contains the sleeptimes and weights for a set of mammals (available also in the dagdata repository on github). This data set contains 83 rows and 11 variables.
+
+```{r, eval=FALSE}
+msleep <- read.csv("./data2/msleep.csv")
+head(msleep)
+names(msleep)
+```
+> **name**:	common names; **genus**: taxonomic rank  
+> **vore**:	carnivore, omnivore or herbivore?  
+> **order**: taxonomic rank  
+> **conservation**:	the conservation status of the mammal  
+> **sleep_total**: total amount of sleep, in hours  
+>  **sleep_rem**: rem sleep, in hours  
+>  **sleep_cycle**: length of sleep cycle, in hours  
+>  **awake**: amount of time spent awake, in hours  
+>  **brainwt**, **bodywt**: brain weight and body weight in kilograms  
+
+Important dplyr verbs to remember
+==============
+
+| verbs |	Description |
+------:|:-----|
+| select() |	select columns |
+| filter() |	filter rows |
+| arrange() |	re-order or arrange rows |
+| mutate() |	create new columns |
+| summarise()	| summarise values |
+| group_by()	| allows for group operations in the “split-apply-combine” concept |
+
+Data wrangling examples
+===================
+#### Selecting columns with `select()`:
+```{r, eval=TRUE}
+sleepData <- select(msleep, name, sleep_total)
+head(sleepData)
+```
+
+#### Filtering rows with `filter()`:
+```{r, eval=FALSE}
+longsleep <- filter(msleep, sleep_total >= 16) # simple filtering
+head(longsleep)
+filter(msleep, sleep_total >= 16, bodywt >= 1) # filtering with more than one conditions (AND).
+```
+
+Pipe operator: %>%
+==================
+dplyr imports this operator from another package (magrittr). This operator allows you to pipe the output from one function to the _first_ input of another function.
+
+```{r, eval=FALSE}
+head(select(msleep, name, sleep_total)) # nesting functions
+```
+
+Compare the _classic_ nesting function above with the following:
+
+```{r, eval=FALSE}
+msleep %>%
+  select(name, sleep_total) %>%
+  head
+```
+
+
+
+(source: http://genomicsclass.github.io/book/pages/dplyr_tutorial.html)
+
+Wrap-up Exercise (15-20 min)
+===================
+
+Note use pipes instead of nesting functions.
+
+__Basics__  
+(1) Arrange (or re-order) rows by a particular column, the taxonomic order, using `arrange()` function.  
+(2) Select three columns (name, order, and sleep_total) from msleep, arrange the rows by the taxonomic order and then arrange the rows by sleep_total. Finally show the head of the final data frame.  
+(3) Create a new column called `rem_proportion` which is the ratio of rem sleep to total amount of sleep using `mutate()`.
+
+__Challenges__  
+(4) Using `summarise()`, compute the average number of hours of sleep, apply the mean() function to the column sleep_total and call the summary value avg_sleep.  
+(5) Using `group_by()` function, split the msleep data frame by the taxonomic order (order), then ask for the same summary statistics as above. This should yield a set of summary statistics for each taxonomic order.
+
+Solutions and discussions (15 min)
+============================
+
+Take a look at http://genomicsclass.github.io/book/pages/dplyr_tutorial.html
+
+
+Module 5: Programming (scripting) in R
+===================
+* User-defined functions
+* Loops and vectorization
+* if-else
+* Debugging
+
+User-defined Functions
+===================
+* Modulize your code by encapsulating a set of operations
+* Eliminate redundancy
+* Increase readability
+
+User-defined Functions (cont)
+====================
+```{r, eval=FALSE}
+mult_fun <- function(a = 1, b = 1) {
+  return(a*b)
+}
+
+mult_fun  # show the function's code
+mult_fun(2,3) # function call
+mult_fun() # would this be an error?
+```
+* A function returns the last value operated
+* A function returns only one object; use a list to return multiple objects
+* Every operation in R is a function call
+```{r, eval=FALSE}
+x <- 10; y <- 20
+x + y
+`+`(x, y)
+```
+
+Loops
+==================
+* For loops
+```{r, eval=FALSE}
+for(i in 1:10) {
+  print(i)
+}
+```
+
+* While loops
+```{r, eval=FALSE}
+i <- 0
+while(i < 5) {
+  i <- i + 1 
+  print(i)
+}
+```
+
+Vectorization
+====================
+```{r, eval=FALSE}
+########## a bad loop, with 'growing' data
+set.seed(42);
+m=1000; n=1000;
+mymat <- replicate(m, rnorm(n)) # create matrix of normal random numbers
+system.time(
+  for (i in 1:m) {
+    for (j in 1:n) {
+      mymat[i,j] <- mymat[i,j] + 10*sin(0.75*pi)
+    }
+  }
+)
+```
+
+```{r, eval=FALSE}
+#### vectorized version
+set.seed(42);
+m=1000; n=1000;
+mymat1 <- replicate(m, rnorm(n))
+system.time(
+  mymat1 <- mymat1 + 10*sin(0.75*pi)
+)
+```
+
+If-else statement
+====================
+
+```{r, eval=FALSE}
+if (condition1) {
+  # do this when condition1 == TRUE
+} else if (condition2) {
+  # do this when condition2 == TRUE
+} else {
+  # else do this
+}
+```
+
+Debugging R Code
+===================
+* Stopping on a line
+  + Editor breakpoints
+  + browser() breakpoints
+  + When an error occurs
+  + debug()
+  + options(error = browser) / options(error = NULL) 
+
+* Read https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio
+
+Good Coding Style Practices (readability!)
+======================
+* Always give meaningful names
+  + fit-models.R instead of foo.r
+  + day_1 instead of d1
+* Spacing around all infix operators (=, +, -, *, etc)
+  + average <- mean(feet / 12 + inches, na.rm = TRUE)
+  + average<-mean(feet/12+inches,na.rm=TRUE)
+* Always indent the code inside curly braces.
+```{r, eval=FALSE}
+if (y < 0 && debug) {
+  message("Y is negative")
+} else {
+  message("Y is not negative")
+}
+```
+
+Wrap-up Exercise (15 min)
+=====================
+__Basics__  
+1) Write an R function that will take an input vector and set any negative values in the vector to zero.  
+
+__Challenges__  
+2) Write an R function that will take an input vector and set any value below a threshold to be the value of threshold. Optionally, the function should instead set values above a threshold to the value of the threshold.  
+
+3) Augment your function so that it checks that the input is a numeric vector and return an error if not. (See the help information for stop().)  
+
+Solutions and discussions
+===========================
+1)  
+
+2)  
+
+3)  
+
+End note: getting help for further study
+=============================
+* Rseek meta search engine: http://rseek.org/ 
+* R-help listserv: https://www.r-project.org/mail.html
+* Stack Overflow: http://stackoverflow.com/questions/tagged/r
+* Cross-Validated: the statistics Q&A site http://stats.stackexchange.com/
+* Contact CIS: helpdesk@hmc.edu or jepark@hmc.edu
+* HMC R Users Group: r-users-l@g.hmc.edu
+
+
+==============================
+
+# Thank you!
+
