@@ -2,7 +2,7 @@
 ## Jeho Park
 ## Module 0, Module 1, and Module 2
 
-#Look Ma, R can do Math!  ---------
+#Look Ma, R can do Math!  ----------
 1+1
 2+runif(1,0,1)
 2+runif(1,min=0,max=1)
@@ -117,19 +117,18 @@ tail(data)
 # Data Import (Cont.) ----
 rta <- read.table("./data/RTADataSub.csv", sep = ",", head = TRUE)
 dim(rta)
-rta[1:5, 1:5]
+rta[1:4, 1:5]
 class(rta)
 class(rta$time) # what? let's see ?read.table more carefully
 
 rta2 <- read.table("./data/RTADataSub.csv", sep = ",", head = TRUE, stringsAsFactors = FALSE)
-class(rta2$time)
+
 
 # Data and Plot Export ----
 write.csv(data, file = "temp.csv", row.names = FALSE) 
 save.image(file="myenv.RData")
-
-pdf('myplot.pdf', width = 7, height = 7) # call pdf() before calling plot()
 x <- rnorm(10); y <- rnorm(10)
+pdf('myplot.pdf', width = 7, height = 7) # call pdf() before calling plot()
 plot(x, y)
 dev.off()
 
@@ -145,7 +144,7 @@ u
 x[u] # subsetting using a boolean vector
 y <- list(foo=x, bar=x[u]) 
 y
-y[[1]]
+y2 <- y[[1]]
 y$bar
 
 # use of subset function
