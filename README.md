@@ -1,7 +1,7 @@
 # HMC Summer Dara Science REU 2018
-**R Bootcamp  
+## R Bootcamp  
 Instructor: Jeho Park  
-Date: May 28-29, 2018**
+Date: May 28-29, 2018
 
 ## This R bootcamp is...
 * about R's programming aspects.
