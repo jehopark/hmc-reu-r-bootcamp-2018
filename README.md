@@ -10,6 +10,8 @@ HMC Summer Data Science Workshop: R Bootcamp Day1 and Day 2
   - This bootcamp materials are used to help you get up to speed on using R as quickly as possible for your research activites 
 
 ## R Bootcamp Day 1 Agenda
+Day 1 Slides: http://rpubs.com/jepark/hmc-reu2018-r-day1
+
 * Module 0: Introduction
   + About this bootcamp
   + Learning Objectives
@@ -29,6 +31,7 @@ HMC Summer Data Science Workshop: R Bootcamp Day1 and Day 2
   + Graphics (base plots)
   + Simple graph manipulations (base plots)
 ## R Bootcamp Day 2 Agenda
+Day 2 Slides: http://rpubs.com/jepark/hmc-reu2018-r-day2
 * Module 2: Working with Data (Part 2)
   + Graphics (base graphics)
   + Manipulating graphs (base graphics)
