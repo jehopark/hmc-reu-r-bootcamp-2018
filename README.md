@@ -1,5 +1,7 @@
 # HMC Summer Dara Science REU 2018
-HMC Summer Data Science Workshop: R Bootcamp Day1 and Day 2
+**R Bootcamp
+Instructor: Jeho Park
+Date: May 28-29, 2018**
 
 ## This R bootcamp is...
 * about R's programming aspects.
