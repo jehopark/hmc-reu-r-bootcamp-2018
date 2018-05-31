@@ -1,5 +1,48 @@
 # HMC Summer Dara Science REU 2018
-HMC Summer Data Science Workshop: R Bootcamp
+HMC Summer Data Science Workshop: R Bootcamp Day1 and Day 2
 
-## This is a test for GitHub sync
-### Changes made from RStudio 
+## This R bootcamp is...
+* about R's programming aspects.
+  - It's designed to help you start using and coding R.
+* not about Statistics.
+  - I assume that you already have a basic knowledge of Statistics
+* for your summer research and beyond.
+  - This bootcamp materials are used to help you get up to speed on using R as quickly as possible for your research activites 
+
+## R Bootcamp Day 1 Agenda
+* Module 0: Introduction
+  + About this bootcamp
+  + Learning Objectives
+  + About R
+  + Getting ready (R environment setup)
+* Module 1: The Basics of R
+  + General Stuff
+  + RStudio
+  + R Data Structure (R Objects)
+  + Basic graphics
+* Module 2: Working with Data
+  + (Almost) clean data (CSV files)
+  + Data import and export (interactively)
+  + Data cleaning
+  + Subsetting
+  + Matrix vs Data Frame 
+  + Graphics (base plots)
+  + Simple graph manipulations (base plots)
+## R Bootcamp Day 2 Agenda
+* Module 2: Working with Data (Part 2)
+  + Graphics (base graphics)
+  + Manipulating graphs (base graphics)
+  + **ggplot2 graphics**
+* Module 3: Managing R project
+  + R workspace and working directory
+  + Using R packages (installing, loading, namespaces)
+  + **Reproducible research: sharing R files and projects using Git/Github**
+* Module 4: tidyverse and dplyr package
+  + Data wrangling
+* Module 5: Programming (scripting) in R
+  + Function
+  + Loop (for loop)
+  + Vectorization
+  + If-else
+  + Debugging
+  + Good coding practices
